@@ -1,4 +1,23 @@
 # linux
+
+## 환경변수
+설정 
+```s
+export <환경변수 명>=값
+
+```
+영구 적용  
+```s
+## /etc/bash.bashrc root
+## /home/사용자명/.bashrc 특정사용자
+## 후행에 추가
+USER_BASHRC_PATH=~/.bashrc
+echo "export <환경변수 명>=값" >> $USER_BASHRC_PATH
+## sudo 권한 필요 시 
+ROOT_BASHRC_PATH=/etc/bash.bashrc
+echo "export <환경변수 명>=값" | sudo tee -a $ROOT_BASHRC_PATH >/dev/null
+```
+
 ## echo에서 root파일쓰기
 ```s
 echo "my text" > /path/to/text  ## root 권한 사용 불가
