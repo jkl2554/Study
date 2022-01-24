@@ -62,3 +62,43 @@ sudo iptables -t nat -L PREROUTING
 ```s
 sudo iptables-save
 ```
+
+EOF 정리  
+```s
+cat <<EOF | <cammand> -file - 
+파일 내용
+EOF
+
+cat <<EOF > <filename>
+파일 내용
+EOF
+## 예
+cat <<EOF | kubectl apply -f - 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: $DNS_LABEL-ingress
+  namespace: keycloak
+  annotations:
+    kubernetes.io/ingress.class: $INGRESS_CLASS
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  tls:
+  - hosts:
+    - $DNS_LABEL.koreacentral.cloudapp.azure.com
+    secretName: tls-secret
+  rules:
+  - host: $DNS_LABEL.koreacentral.cloudapp.azure.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: keycloak-http
+            port: 
+              number: 80
+        path: /(.*)
+        pathType: Prefix
+EOF
+```
