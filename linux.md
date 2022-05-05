@@ -102,3 +102,8 @@ spec:
         pathType: Prefix
 EOF
 ```
+Shell script 실행 파일 위치
+```s
+## 실행 파일의 디렉토리
+dirname $(readlink -f $0)
+```
