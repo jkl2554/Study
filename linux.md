@@ -107,3 +107,12 @@ Shell script 실행 파일 위치
 ## 실행 파일의 디렉토리
 dirname $(readlink -f $0)
 ```
+
+linux user
+```s
+sudo -i #root 환경변수 
+sudo su #user 환경변수 
+su #root 계정으로 로그인
+su root #root 계정으로 로그인
+su - #root계정 로그인 root 환경변수
+```
