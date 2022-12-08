@@ -126,7 +126,9 @@ Start-Job -Name "Download $FileName" -ScriptBlock {param($url, $FileName, $TEMP,
 - memory: 8196 MB
 - Network Adapter: `$SWNAME`
 #### 디스크 추가작업
-- DataDisk: 2048 GB
+- Disk Type: Dynamically Expending
+- Location: F:\
+- Size: 2048 GB
 ## in DBGW Guest VM
 ```ps
 Get-HcsIpAddress
