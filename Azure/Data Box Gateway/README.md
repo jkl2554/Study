@@ -65,6 +65,9 @@ Add-WindowsCapability -Online -Name ServerCore.AppCompatibility~~~~0.0.1.0
 Hyper-v 설치
 ```ps
 Install-WindowsFeature -Name Hyper-V -IncludeManagementTools -Restart
+```
+Hyper-v Manager 실행
+```ps
 virtmgmt.msc
 ```
 Disk partition설정
