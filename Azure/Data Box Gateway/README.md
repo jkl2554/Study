@@ -1,6 +1,6 @@
 # Databox Gateway Install
 ## 선행 조건
-- Powershell Az Module 설치: https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0
+- Powershell Az Module 설치: https://learn.microsoft.com/powershell/azure/install-az-ps
 
 ## Azure vm deploy
 ```ps
