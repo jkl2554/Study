@@ -2,12 +2,12 @@
 
 ## 환경변수
 설정 
-```s
+```sh
 export <환경변수 명>=값
 
 ```
 영구 적용  
-```s
+```sh
 ## /etc/bash.bashrc root
 ## /home/사용자명/.bashrc 특정사용자
 ## 후행에 추가
@@ -19,14 +19,14 @@ echo "export <환경변수 명>=값" | sudo tee -a $ROOT_BASHRC_PATH >/dev/null
 ```
 
 ## echo에서 root파일쓰기
-```s
+```sh
 echo "my text" > /path/to/text  ## root 권한 사용 불가
 echo "my text" | sudo tee /path/to/text > /dev/null  ## 파일 쓰기 시 root로 씀
 ```
 
 ## systemd
 
-```s
+```sh
 systemctl --user ## 유저별 서비스 설정
 
 # /etc/systemd/system/ # root systemd 디렉토리
@@ -35,7 +35,7 @@ systemctl --user ## 유저별 서비스 설정
 ```
 ## ubuntu iptables
 
-```s
+```sh
 ## IP tables를 이용해 80 443 포트 8080 8443에 각각 매핑
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
@@ -48,7 +48,7 @@ sudo iptables -t nat -L PREROUTING
 # REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 8443
 ```
 *iptables 변경 시 바로 적용되니 설정 시 주의 필요.  
-```s
+```sh
 ## IP tables를 이용해 80 443 포트 8080 8443에 매핑한 정보 제거
 sudo iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 sudo iptables -t nat -D PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
@@ -59,12 +59,12 @@ sudo iptables -t nat -L PREROUTING
 # CNI-HOSTPORT-DNAT  all  --  anywhere             anywhere             ADDRTYPE match dst-type LOCAL
 ```
 재 시작 시 자동 적용되게 저장  
-```s
+```sh
 sudo iptables-save
 ```
 
 EOF 정리  
-```s
+```sh
 cat <<EOF | <cammand> -file - 
 파일 내용
 EOF
@@ -102,17 +102,25 @@ spec:
         pathType: Prefix
 EOF
 ```
-Shell script 실행 파일 위치
-```s
+Shell script 실행 파일 위치  
+```sh
 ## 실행 파일의 디렉토리
 dirname $(readlink -f $0)
 ```
 
-linux user
-```s
+linux user  
+```sh
 sudo -i #user 계정으로 로그인 root 환경변수 
 sudo su - #user 계정으로 로그인 root 환경변수 
 sudo su #user 계정으로 로그인 user 환경변수
 su root #root 계정으로 로그인 user 환경변수
 su - #root계정 로그인 root 환경변수
+```
+
+파일 내용 바꾸기(sed)  
+```sh
+cat << EOF >myclient.yaml
+mytest_\${VERSION}
+EOF
+sed 's/${VERSION}/4.4.24-23/g' myclient.yaml
 ```
