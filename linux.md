@@ -122,5 +122,7 @@ su - #root계정 로그인 root 환경변수
 cat << EOF >myclient.yaml
 mytest_\${VERSION}
 EOF
+## mytest_\${VERSION}
 sed 's/${VERSION}/4.4.24-23/g' myclient.yaml
+## mytest_4.4.24-23
 ```
