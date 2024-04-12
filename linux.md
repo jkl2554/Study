@@ -41,7 +41,8 @@ prompt> shopt login_shell
 login_shell     off
 
 ```
-
+#### 참고문서 
+* https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html#Bash-Startup-Files
 
 ## echo에서 root파일쓰기
 ```sh
