@@ -6,7 +6,7 @@
 export <환경변수 명>=값
 
 ```
-영구 적용  
+### 영구 적용  
 ```sh
 ## /etc/bash.bashrc root
 ## /home/사용자명/.bashrc 특정사용자
@@ -17,6 +17,31 @@ echo "export <환경변수 명>=값" >> $USER_BASHRC_PATH
 ROOT_BASHRC_PATH=/etc/bash.bashrc
 echo "export <환경변수 명>=값" | sudo tee -a $ROOT_BASHRC_PATH >/dev/null
 ```
+
+### `.bashrc` vs `.bash_profile`
+```sh
+## .bashrc 는 비 로그인 Shell 에서 실행 .bash_profile 는 로그인 Shell 에서 실행
+## 로그인 shell 비 로그인 shell 확인
+################### 로그인 shell .bashrc, .bash_profile 모두 실행됨
+prompt> echo $0
+-bash # "-" is the first character. Therefore, this is a login shell.
+
+prompt> shopt login_shell
+login_shell     on
+
+######################
+
+prompt> bash # Enter NOT a login shell
+
+################### 비 로그인 shell 진입 시 .bashrc만 실행됨
+prompt> echo $0
+bash # "-" is NOT the first character. This is NOT a login shell
+
+prompt> shopt login_shell
+login_shell     off
+
+```
+
 
 ## echo에서 root파일쓰기
 ```sh
@@ -117,7 +142,7 @@ su root #root 계정으로 로그인 user 환경변수
 su - #root계정 로그인 root 환경변수
 ```
 
-파일 내용 바꾸기(sed)  
+## 파일 내용 바꾸기(sed)  
 ```sh
 cat << EOF >myclient.yaml
 mytest_\${VERSION}
@@ -126,3 +151,15 @@ EOF
 sed 's/${VERSION}/4.4.24-23/g' myclient.yaml
 ## mytest_4.4.24-23
 ```
+
+## set 명령어  
+```sh
+set -o # 현재 설정된 옵션 보기
+set -o <options> # 옵션 설정
+set +o <options> # 옵션 해제
+# ex
+set -o vi # 커맨드라인 vi형태 명령으로 변경 default는 대부분 emacs
+# 설정 변경 시 해당 shell 에서만 적용되니 .bashrc 등에서 미리 설정 해 두면 좋다.
+```
+
+n
